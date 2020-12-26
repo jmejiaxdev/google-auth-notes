@@ -1,0 +1,12 @@
+{
+  "name": "notes-app-google-auth",
+  "version": "1.0.0",
+  "description": "How to add Google OAuth to your web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "jmejia",
+  "license": "ISC"
+}
