@@ -2,11 +2,23 @@
   "name": "notes-app-google-auth",
   "version": "1.0.0",
   "description": "How to add Google OAuth to your web app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "jmejia",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
