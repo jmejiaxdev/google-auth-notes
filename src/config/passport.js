@@ -1,19 +1,30 @@
-const passportStrategy = require("passport-google-oauth20").Strategy;
-// const mongoose = require("mongoose"); // FIXME: Remove
-const user = require("../models/user");
-
-// dotenv.config(); // FIXME: Remove
+const googleStrategy = require("passport-google-oauth20").Strategy;
+const userSchema = require("../models/user");
 
 module.exports = (passport) => {
   passport.use(
-    new passportStrategy(
+    new googleStrategy(
       {
         clientID: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
         callbackURL: "/auth/google/callback",
       },
-      async (accessToken, refreshToken, profile) => {
+      async (accessToken, refreshToken, profile, done) => {
         console.log(profile);
+        try {
+          const createUser = async () =>
+            await userSchema.create({
+              googleId: profile.id,
+              displayName: profile.displayName,
+              firstName: profile.name.givenName,
+              lastName: profile.name.familyName,
+              image: profile.photos[0].value,
+            });
+          const user = await userSchema.findOne({ googleId: profile.id });
+          done(null, user ? user : createUser()); // TODO: Add babel ??
+        } catch (error) {
+          console.log(error);
+        }
       }
     )
   );
@@ -23,7 +34,7 @@ module.exports = (passport) => {
   });
 
   passport.deserializeUser((id, done) => {
-    user.findById(id, (err, user) => {
+    userSchema.findById(id, (err, user) => {
       done(err, user);
     });
   });

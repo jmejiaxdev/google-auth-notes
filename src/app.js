@@ -17,9 +17,6 @@ dotenv.config();
 // Mongoose
 connectDb();
 
-// Passport
-passportConfig(passport);
-
 // Handlebars
 app.engine(".hbs", handlebars({ defaultLayout: "main", extname: ".hbs" })); // Express template engine
 app.set("view engine", ".hbs");
