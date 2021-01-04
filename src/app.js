@@ -6,6 +6,8 @@ const path = require("path");
 const passport = require("passport");
 const passportConfig = require("./config/passport");
 const session = require("express-session");
+const mongoose = require("mongoose");
+const connectMongo = require("connect-mongo");
 
 const port = 3000;
 
@@ -23,11 +25,14 @@ app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "./views/"));
 
 // Express sessions
+const MongoStoreFactory = connectMongo(session);
+
 app.use(
   session({
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
+    store: new MongoStoreFactory({ mongooseConnection: mongoose.connection }),
   })
 );
 
