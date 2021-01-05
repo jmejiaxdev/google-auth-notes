@@ -18,4 +18,13 @@ router.post("/add", ensureAuth, async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const note = await noteSchema.findById(req.params.id).lean();
+    res.render("notes/read", { note });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
