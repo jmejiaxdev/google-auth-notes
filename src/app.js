@@ -19,6 +19,8 @@ dotenv.config();
 // Mongoose
 connectDb();
 
+// app.use(require('morgan')('dev')); FIXME
+
 // Handlebars
 app.engine(".hbs", handlebars({ defaultLayout: "main", extname: ".hbs" })); // Express template engine
 app.set("view engine", ".hbs");
@@ -42,8 +44,13 @@ passportConfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Routes
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./routes/auth"));
+app.use("/notes", require("./routes/notes"));
 
 app.listen(port, console.log("Listening at port 3000"));
