@@ -1,7 +1,7 @@
 <h1>{{note.title}}</h1>
 <h3>{{note.body}}</h3>
 <br>
-<p>{{note.dateCreated}}</p>
+<p>{{formatDate note.dateCreated}}</p>
 <br>
 <form action="/notes/delete/{{note._id}}" method="POST" >
     <input type="hidden" name="_method" value="DELETE">

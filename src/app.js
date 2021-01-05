@@ -9,6 +9,7 @@ const session = require("express-session");
 const mongoose = require("mongoose");
 const connectMongo = require("connect-mongo");
 const methodOverride = require("method-override");
+const formatDate = require("./helpers/formatDate.js");
 
 const port = 3000;
 
@@ -23,7 +24,7 @@ connectDb();
 // app.use(require('morgan')('dev')); FIXME
 
 // Handlebars
-app.engine(".hbs", handlebars({ defaultLayout: "main", extname: ".hbs" })); // Express template engine
+app.engine(".hbs", handlebars({ defaultLayout: "main", extname: ".hbs", helpers: { formatDate } })); // Express template engine
 app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "./views/"));
 
