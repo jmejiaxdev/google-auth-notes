@@ -27,4 +27,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/edit/:id", async (req, res) => {
+  try {
+    const note = await noteSchema.findById(req.params.id).lean();
+    res.render("notes/edit", { note });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    await noteSchema.findOneAndUpdate({ _id: req.params.id }, { title: req.body.title, body: req.body.body });
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
