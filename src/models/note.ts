@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface Note {
   title: string;
@@ -22,8 +22,8 @@ const schema = new Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
 });
 
-export const noteModel = mongoose.model<Note & Document>("Note", schema);
+export const noteModel = mongoose.model<Note & Document>('Note', schema);

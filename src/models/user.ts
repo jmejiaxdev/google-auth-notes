@@ -1,14 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
-
-export interface User {
-  id?: string;
-  googleId: string;
-  displayName: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-  createdAt?: Date;
-}
+import mongoose, { Schema, Document } from 'mongoose';
 
 const schema = new Schema({
   googleId: {
@@ -37,4 +27,7 @@ const schema = new Schema({
   },
 });
 
-export const userModel = mongoose.model<User & Document>("User", schema);
+export const userModel = mongoose.model<Express.User & Document>(
+  'User',
+  schema
+);

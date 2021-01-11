@@ -1,6 +1,12 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": "./src"
-  }
+    "baseUrl": ".",
+    "typeRoots": [
+      "@types", // custom merged types must be first in a list
+      "node_modules/@types"
+    ]
+  },
+  "include": ["src", "types.d.ts"],
+  "exclude": ["node_modules", "**/*.test.ts", "build"]
 }
